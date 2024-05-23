@@ -30,23 +30,33 @@ Body :
 ```
 
 
-**Get All Products or Search Products**
+**Get All Products**
 
 URL: `/api/products`
 
 Method: GET
 
-Query Params:
-searchTerm (optional): The term to search for in the product's name, description, category, or tags.
 
-Get Single Product
+
+**Search a product**
+
+searchTerm (optional) :  The term to search for in the product's name, description, category, or tags.
+
+URL : `/api/products/searchTerm?query=Wireless Mouse`
+
+Method : GET
+
+**Get Single Product**
 
 URL: `/api/products/:productId
-Method: GET
-Update Product`
 
-URL: `/api/products/:productId
-Method: PUT`
+Method : GET
+
+**Update Product**
+
+URL: `/api/products/:productId`
+
+Method : PUT
 
 Body :
 
