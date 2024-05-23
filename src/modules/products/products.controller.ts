@@ -29,7 +29,7 @@ const productController = async (req: Request, res: Response) => {
   
     res.status(500).json({
       success: false,
-      message: error.message || 'An error occurred while creating the product',
+      message: error || 'An error occurred while creating the product',
     });
   }
 };
@@ -117,7 +117,7 @@ const searchProducts = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message || 'An error occurred while searching for products',
+      message: error || 'An error occurred while searching for products',
     });
   }
 };
