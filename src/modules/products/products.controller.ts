@@ -75,7 +75,7 @@ const updateProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: "An error occurred while updating the product",
-      error: error.message,
+      error: error,
     });
   }
 };
