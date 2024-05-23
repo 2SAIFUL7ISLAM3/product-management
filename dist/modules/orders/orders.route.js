@@ -10,5 +10,5 @@ const orders_controller_1 = require("./orders.controller");
 const router = express_1.default.Router();
 router.post('/', orders_controller_1.orderControllers.createOrder);
 router.get('/', orders_controller_1.orderControllers.getAllOrders);
-router.get('/email', orders_controller_1.orderControllers.getOrdersByEmail);
+router.get('/search', orders_controller_1.orderControllers.getOrdersByEmail);
 exports.ordersRoutes = router;

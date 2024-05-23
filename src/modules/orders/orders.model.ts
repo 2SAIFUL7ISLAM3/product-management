@@ -1,7 +1,6 @@
 // orders.model.ts
 import mongoose, { Schema, Model } from 'mongoose';
 import { TOrder } from './orders.interface';
-import { ProductModel } from '../products/products.model';
 
 
 const orderSchema = new Schema<TOrder>({

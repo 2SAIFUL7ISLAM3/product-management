@@ -83,14 +83,29 @@ const deleteProduct = async (req: Request, res: Response) => {
 };
 
 const searchProducts = async (req: Request, res: Response) => {
-    const { query } = req.query as { query: string };
-    const result = await productService.searchProducts(query);
+  try {
+    const { searchTerm } = req.query as { searchTerm: string };
+
+    if (!searchTerm) {
+      return res.status(400).json({
+        success: false,
+        message: 'Query parameter is required',
+      });
+    }
+
+    const result = await productService.searchProducts(searchTerm);
     res.json({
       success: true,
       message: 'Products retrieved successfully',
       data: result,
     });
-  };
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message || 'An error occurred while searching for products',
+    });
+  }
+};
 
 export const productControllers = {
   productController,

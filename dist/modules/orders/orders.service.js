@@ -13,16 +13,16 @@ exports.orderService = void 0;
 const orders_model_1 = require("./orders.model");
 const products_model_1 = require("../products/products.model");
 const createNewOrder = (order) => __awaiter(void 0, void 0, void 0, function* () {
-    const { ProductId, quantity } = order;
     // Reduce the quantity of the ordered product in inventory
-    const product = yield products_model_1.ProductModel.findById(ProductId);
+    const product = yield products_model_1.ProductModel.findById(order.ProductId);
     if (!product) {
         throw new Error('Product not found');
     }
-    if (product.inventory.quantity < quantity) {
+    if (product.inventory.quantity < order.quantity) {
         throw new Error('Insufficient stock');
     }
-    product.inventory.quantity -= quantity;
+    // Update inventory
+    product.inventory.quantity -= order.quantity;
     product.inventory.inStock = product.inventory.quantity > 0;
     yield product.save();
     // Create the order
