@@ -12,18 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.orderService = void 0;
 const orders_model_1 = require("./orders.model");
 const products_model_1 = require("../products/products.model");
-const createOrder = (order) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield orders_model_1.OrderModel.create(order);
-    return result;
-});
-const getAllOrders = () => __awaiter(void 0, void 0, void 0, function* () {
-    const results = yield orders_model_1.OrderModel.find();
-    return results;
-});
-const getOrdersByEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
-    const results = yield orders_model_1.OrderModel.find({ email });
-    return results;
-});
 const createNewOrder = (order) => __awaiter(void 0, void 0, void 0, function* () {
     const { ProductId, quantity } = order;
     // Reduce the quantity of the ordered product in inventory
@@ -41,9 +29,16 @@ const createNewOrder = (order) => __awaiter(void 0, void 0, void 0, function* ()
     const result = yield orders_model_1.OrderModel.create(order);
     return result;
 });
+const getAllOrders = () => __awaiter(void 0, void 0, void 0, function* () {
+    const results = yield orders_model_1.OrderModel.find();
+    return results;
+});
+const getOrdersByEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
+    const results = yield orders_model_1.OrderModel.find({ email });
+    return results;
+});
 exports.orderService = {
-    createOrder,
+    createNewOrder,
     getAllOrders,
     getOrdersByEmail,
-    createNewOrder,
 };

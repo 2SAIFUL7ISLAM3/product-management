@@ -1,15 +1,37 @@
 import { Request, Response } from "express";
 import { productService } from "./products.service";
+import { z } from "zod";
+import { ProductSchema } from "./productValidation";
 
 const productController = async (req: Request, res: Response) => {
-  const productData = req.body;
 
-  const result = await productService.createProduct(productData);
-  res.json({
-    success: true,
-    message: "Product is created successfully",
-    data: result,
-  });
+  try {
+    // Validate incoming data
+    const productData = ProductSchema.parse(req.body);
+
+    const result = await productService.createProduct(productData);
+    res.json({
+      success: true,
+      message: 'Product created successfully!',
+      data: result,
+    });
+  } catch (error) {
+
+    
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation error',
+        errors: error.errors,
+      });
+    }
+
+  
+    res.status(500).json({
+      success: false,
+      message: error.message || 'An error occurred while creating the product',
+    });
+  }
 };
 
 const getAllProductController = async (req: Request, res: Response) => {
@@ -20,6 +42,7 @@ const getAllProductController = async (req: Request, res: Response) => {
     data: result,
   });
 };
+
 const getSingleProductController = async (req: Request, res: Response) => {
   const { productId } = req.params;
 

@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.post('/', orderControllers.createOrder);
 router.get('/', orderControllers.getAllOrders);
-router.get('/email', orderControllers.getOrdersByEmail);
+router.get('/search', orderControllers.getOrdersByEmail);
 
 export const ordersRoutes = router;

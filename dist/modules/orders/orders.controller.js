@@ -14,7 +14,7 @@ const orders_service_1 = require("./orders.service");
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const orderData = req.body;
-        const result = yield orders_service_1.orderService.createOrder(orderData);
+        const result = yield orders_service_1.orderService.createNewOrder(orderData);
         res.json({
             success: true,
             message: 'Order created successfully!',

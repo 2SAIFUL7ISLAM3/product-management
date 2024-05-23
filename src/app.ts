@@ -1,4 +1,4 @@
-import express, { Application } from 'express'
+import express, { Application } from 'express';
 import cors from 'cors';
 import { productsRoutes } from './modules/products/products.route';
 import { ordersRoutes } from './modules/orders/orders.route';

@@ -1,9 +1,9 @@
 // orderValidation.ts
 import { z } from 'zod';
 
-export const orderSchema = z.object({
+export const OrderSchema = z.object({
   email: z.string().email(),
-  ProductId: z.string(),
-  price: z.number(),
-  quantity: z.number(),
+  ProductId: z.string().length(24, 'Invalid product ID'), 
+  price: z.number().positive(),
+  quantity: z.number().int().positive(),
 });
