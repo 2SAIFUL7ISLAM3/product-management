@@ -1,4 +1,4 @@
-** API Endpoints **
+**API Endpoints**
 
 Products
 
@@ -27,12 +27,10 @@ Body :
     "inStock": true
   }
 }
-
-
 ```
 
 
-** Get All Products or Search Products **
+**Get All Products or Search Products**
 
 URL: `/api/products`
 
