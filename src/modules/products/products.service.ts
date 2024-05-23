@@ -17,8 +17,12 @@ const getSingleProduct = async (_id: string) => {
 };
 
 const updateProduct = async (_id: string, updateData: Partial<TProduct>) => {
-  const result = await ProductModel.findByIdAndUpdate(_id, updateData);
-  return result;
+  try {
+    const result = await ProductModel.findByIdAndUpdate(_id, updateData, { new: true });
+    return result;
+  } catch (error) {
+    throw new Error(`Failed to update product: ${error.message}`);
+  }
 };
 
 const deleteProduct = async (_id: string) => {
@@ -31,9 +35,9 @@ const deleteProduct = async (_id: string) => {
 };
 
 
-const searchProducts = async (searchTerm: string) => {
+const searchProducts = async (query: string) => {
   try {
-    const regex = new RegExp(searchTerm, 'i');
+    const regex = new RegExp(query, 'i');
     const results = await ProductModel.find({
       $or: [
         { name: regex },

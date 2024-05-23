@@ -57,12 +57,27 @@ const getSingleProductController = async (req: Request, res: Response) => {
 const updateProduct = async (req: Request, res: Response) => {
   const { productId } = req.params;
   const updateData = req.body;
-  const result = await productService.updateProduct(productId, updateData);
-  res.json({
-    success: true,
-    message: "Product updated successfully",
-    data: result,
-  });
+
+  try {
+    const result = await productService.updateProduct(productId, updateData);
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+    res.json({
+      success: true,
+      message: "Product updated successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while updating the product",
+      error: error.message,
+    });
+  }
 };
 
 const deleteProduct = async (req: Request, res: Response) => {
@@ -84,16 +99,16 @@ const deleteProduct = async (req: Request, res: Response) => {
 
 const searchProducts = async (req: Request, res: Response) => {
   try {
-    const { searchTerm } = req.query as { searchTerm: string };
+    const { query } = req.query as { query: string };
 
-    if (!searchTerm) {
+    if (!query) {
       return res.status(400).json({
         success: false,
         message: 'Query parameter is required',
       });
     }
 
-    const result = await productService.searchProducts(searchTerm);
+    const result = await productService.searchProducts(query);
     res.json({
       success: true,
       message: 'Products retrieved successfully',

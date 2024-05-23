@@ -5,12 +5,15 @@ const router = express.Router();
 
 
 router.post("/",productControllers.productController);
-router.get("/:productId",productControllers.getSingleProductController);
+
+router.get('/searchTerm', productControllers.searchProducts);
+
 router.get("/",productControllers.getAllProductController);
 
-router.get('/', productControllers.searchProducts);
+router.get("/:productId",productControllers.getSingleProductController);
 
 router.put('/:productId', productControllers.updateProduct); 
+
 router.delete('/:productId', productControllers.deleteProduct);
 
 
