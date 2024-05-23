@@ -56,7 +56,7 @@ const getSingleProductController = async (req: Request, res: Response) => {
 
 const updateProduct = async (req: Request, res: Response) => {
   const { productId } = req.params;
-  const updateData = req.body;
+  const { _id, ...updateData } = req.body;
 
   try {
     const result = await productService.updateProduct(productId, updateData);

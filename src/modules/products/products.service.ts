@@ -18,7 +18,7 @@ const getSingleProduct = async (_id: string) => {
 
 const updateProduct = async (_id: string, updateData: Partial<TProduct>) => {
   try {
-    const result = await ProductModel.findByIdAndUpdate(_id, updateData, { new: true });
+    const result = await ProductModel.findByIdAndUpdate(_id, { $set: updateData }, { new: true });
     return result;
   } catch (error) {
     throw new Error(`Failed to update product: ${error.message}`);
